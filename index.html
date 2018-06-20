@@ -1,26 +1,39 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
 
-    <title>Psychic Game</title>
+        <meta charset="UTF-8">
+        <title>Psychic Game</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
 
 <body>
 
-        <script src="./assets/javascript/game.js"></script>
-
 <h1>Psychic Game</h1>
-<h4 class="GuessTitle">Guess what letter I'm thinking of</h4>
-<h4>Wins: </h4>
-<h4>Losses: </h4>
-<h4>Guesses Left: </h4>
-<h4>Your Guesses So Far: </h4>
+
+<h3>Guess what letter I'm thinking of</h3>
 
 <div id="game">
-        <p>Press r, p or s to start playing!</p>
-      </div>
+        <ul class="list-group">
+                <li class="list-group-item">
+                        <p id="wins">Wins: </p>
+                </li>
+                <li class="list-group-item">
+                        <p id="losses">Losses: </p>
+                </li>
+                <li class="list-group-item">
+                        <p id="guessLeft">Guesses Left: </p>
+                </li>
+                <li class="list-group-item">
+                        <p id="let">Your Guesses So Far: </p>
+                </li>
+                </ul>
 
+        <script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
 
 </html>

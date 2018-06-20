@@ -1,50 +1,67 @@
- // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
- var computerChoices = ["r", "p", "s"];
+ //Decalre computerChoices and set the available characters
+var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
- // Creating variables to hold the number of wins, losses, and ties. They start at 0.
- var wins = 0;
- var losses = 0;
- var ties = 0;
+//Declare variables and set them to zero
+var wins = 0;
+var losses = 0;
+var guesses = 10;
+var guessesLeft = 10;
+var guessedLetters = [];
+var letterToGuess = null;
 
- // This function is run whenever the user presses a key.
- document.onkeyup = function(event) {
+//Make the computer choose a random letter from the available choices
+var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
-   // Determines which key was pressed.
-   var userGuess = event.key;
+//Allows the user 10 guesses
+var updateGuessesLeft = function() {
+  // Here we are grabbing the HTML element and setting it equal to the guessesLeft. (i.e. guessesLeft will get displayed in HTML)
+  document.querySelector('#guessLeft').innerHTML = "Guesses Left: " + guessesLeft;
+};
 
-   // Randomly chooses a choice from the options array. This is the Computer's guess.
-   var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+var updateLetterToGuess = function() {
+  this.letterToGuess = this.computerChoices[Math.floor(Math.random() * this.computerChoices.length)];
+};
+var updateGuessesSoFar = function() {
+  // Here we take the guesses the user has tried -- then display it as letters separated by commas. 
+  document.querySelector('#let').innerHTML = "Your Guesses So Far: " + guessedLetters.join(', ');
+};
+// Function will be called when we reset everything
+var reset = function() {
+  totalGuesses = 10;
+  guessesLeft = 10;
+  guessedLetters = [];
 
-   // Reworked our code from last step to use "else if" instead of lots of if statements.
+  updateLetterToGuess();
+  updateGuessesLeft();
+  updateGuessesSoFar();
+}
 
-   // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
-   if ((userGuess === "r") || (userGuess === "p") || (userGuess === "s")) {
+updateLetterToGuess();
+updateGuessesLeft();
 
-     if ((userGuess === "r") && (computerGuess === "s")) {
-       wins++;
-     } else if ((userGuess === "r") && (computerGuess === "p")) {
-       losses++;
-     } else if ((userGuess === "s") && (computerGuess === "r")) {
-       losses++;
-     } else if ((userGuess === "s") && (computerGuess === "p")) {
-       wins++;
-     } else if ((userGuess === "p") && (computerGuess === "r")) {
-       wins++;
-     } else if ((userGuess === "p") && (computerGuess === "s")) {
-       losses++;
-     } else if (userGuess === computerGuess) {
-       ties++;
-     }
+//When key is released it becomes the user's guess
+document.onkeyup = function(event) {
+    guessesLeft--;
+  var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
-     // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guesses, and wins/losses/ties.
-     var html =
-       "<p class=: " + userGuess + "</p>" +
-       "<p>The computer chose: " + computerGuess + "</p>" +
-       "<p>wins: " + wins + "</p>" +
-       "<p>losses: " + losses + "</p>" +
-       "<p>ties: " + ties + "</p>";
+  guessedLetters.push(userGuess);
+  updateGuessesLeft();
+  updateGuessesSoFar();
 
-     // Set the inner HTML contents of the #game div to our html string
-     document.querySelector("#game").innerHTML = html;
-   }
- };
+        if (guessesLeft > 0){
+            if (userGuess == letterToGuess){
+                wins++;
+                document.querySelector('#wins').innerHTML = "Wins: " + wins;
+                alert("Yes, your choice is correct!");
+                reset();
+            }
+        }else if(guessesLeft == 0){
+            // Then we will loss and we'll update the html to display the loss 
+            losses++;
+            document.querySelector('#losses').innerHTML = "Losses: " + losses;
+            alert("You've lost this round");
+            // Then we'll call the reset. 
+            reset();
+        }
+};
+
