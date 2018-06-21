@@ -4,15 +4,15 @@ var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l
 //Declare variables and set them to zero
 var wins = 0;
 var losses = 0;
-var guesses = 10;
-var guessesLeft = 10;
+var guesses = 9;
+var guessesLeft = 9;
 var guessedLetters = [];
 var letterToGuess = null;
 
 //Make the computer choose a random letter from the available choices
 var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
-//Allows the user 10 guesses
+//Allows the user 9 guesses
 var updateGuessesLeft = function() {
   // Here we are grabbing the HTML element and setting it equal to the guessesLeft. (i.e. guessesLeft will get displayed in HTML)
   document.querySelector('#guessLeft').innerHTML = "Guesses Left: " + guessesLeft;
@@ -27,8 +27,8 @@ var updateGuessesSoFar = function() {
 };
 // Function will be called when we reset everything
 var reset = function() {
-  totalGuesses = 10;
-  guessesLeft = 10;
+  totalGuesses = 9;
+  guessesLeft = 9;
   guessedLetters = [];
 
   updateLetterToGuess();
